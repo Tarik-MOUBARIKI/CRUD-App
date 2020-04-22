@@ -100,9 +100,9 @@
         
         <!-- Modal body -->
         <div class="modal-body">
-                           <form action="/up" method="post">
+                           <form action="/update" method="post">
          <div class="form-group">
-         	<input type="hidden" id="vv" name="id" value="" >
+         	<input type="hidden" id="id" name="id" value="" >
                                 <label for="exampleInputPassword1">Product image</label>
                                 <input class="form-control"  class="form-control is-valid"name="image" required="on">
                             </div>
@@ -178,11 +178,27 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
 <script>
 	
 
 
-	       var cc = document.getElementById("vv");
+	       var cc = document.getElementById("id");
            function get(ev) {
 	    let bn = ev.name;
 	    console.log(bn);

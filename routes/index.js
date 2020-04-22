@@ -21,6 +21,7 @@ router.get('/', (req, res) => {
   res.render('login',{json});
 });
 
+// Login
 router.post('/login', (req, res) => {
   
        const us = req.body.username;
@@ -48,34 +49,21 @@ router.get('/signup', (req, res) => {
 });
 
 
-router.post('/signup', (req, res) => {
-  
-     
-    const newprod = req.body;
-
-  
-
-  js.push(newprod);
+router.post('/signup', (req, res) => { 
+    const newproduct = req.body;
+    js.push(newproduct);
 
      
-
-  // saving the array in a file
-  const da = JSON.stringify(js);
-  fs.writeFileSync('signup.json', da, 'utf-8');
-    
-
-  res.redirect('/');
+ // saving the array in a file
+  const data1= JSON.stringify(js);
+  fs.writeFileSync('signup.json', data1, 'utf-8');
+    res.redirect('/');
 });
 
-
-
+// Part Add 
 router.post('/home', (req, res) => {
-  
-     
   const { image, name, price } = req.body;
-
-  
-  let newprod = {
+  let newproduct = {
     id:json.length + 1,
     image,
     name,
@@ -83,12 +71,8 @@ router.post('/home', (req, res) => {
     
   };
 
+  json.push(newproduct);
 
-  json.push(newprod);
-
-     
-
-  // saving the array in a file
   const data = JSON.stringify(json);
   fs.writeFileSync('products.json', data, 'utf-8');
     
@@ -96,36 +80,33 @@ router.post('/home', (req, res) => {
   res.redirect('/home');
 });
 
+// Part Delete
 router.get('/delete/:id', (req, res) => {
   json = json.filter(d => d.id != req.params.id);
 
-  // saving data
+  // Saving data
   const data = JSON.stringify(json);
   fs.writeFileSync('products.json', data, 'utf-8');
-
   res.redirect('/home')
   });
-
-
-
-
-
-
-   router.post('/up', (req, res) => {
-  console.log(req.body, req.params)
+  
+// Part Update
+  router.post('/update', (req, res) => {
   const { id } = req.body;
   const { image,name,price } = req.body;
 
-  json.forEach((product, i) => {
+  json.forEach((product) => {
     if (product.id == id) {
       product.image = image;
        product.name = name;
         product.price = price;
     }
   });
-  res.redirect('/home');
+  const data = JSON.stringify(json);
+  fs.writeFileSync('products.json', data, 'utf-8');
+  res.redirect('/home')
+  });
 
-});
 module.exports = router;
 
 
